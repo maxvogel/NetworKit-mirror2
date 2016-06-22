@@ -12,7 +12,7 @@ before_install:
  - sudo apt-get install scons
  - sudo apt-get install libgtest-dev
  - "cd /usr/src/gtest && sudo cmake . && sudo cmake --build . && sudo mv libg* /usr/local/lib/ ; cd -"
-script: "scons --optimize=Opt --target=Tests && ./NetworKit-Tests-Opt -t"
+script: "scons --optimize=Opt --target=Tests --std=c++11 && ./NetworKit-Tests-Opt -t"
 branches:
   only:
   - master
