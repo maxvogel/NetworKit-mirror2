@@ -106,10 +106,14 @@ env = Environment()
 compiler = GetOption("compiler")
 stdflag = GetOption("std")
 
-if not os.path.isfile("build.conf") and not compiler == None:
-	#print("{0} has been passed via command line".format(compiler))
-	env["CC"] = compiler
-	env["CXX"] = compiler
+if not os.path.isfile("build.conf"):
+	if not compiler == None:
+		#print("{0} has been passed via command line".format(compiler))
+		env["CC"] = compiler
+		env["CXX"] = compiler
+	else:
+		env["CC"] = os.environ['CC']
+		env["CXX"] = os.environ['CXX']
 else:
 	confPath = "build.conf"
 	if not os.path.isfile(confPath):
