@@ -1,0 +1,24 @@
+language: cpp
+sudo: required
+dist: trusty
+compiler:
+- clang
+- gcc
+os:
+- linux
+- osx
+before_install:
+ - sudo apt-get update
+ - sudo apt-get install scons
+ - sudo apt-get install libgtest-dev
+ - "cd /usr/src/gtest && sudo cmake . && sudo cmake --build . && sudo mv libg* /usr/local/lib/ ; cd -"
+script: "scons --optimize=Opt --target=Tests && ./NetworKit-Tests-Opt -t"
+branches:
+  only:
+  - master
+notifications:
+  recipients:
+   - maximilian.vogel@student.kit.edu
+  email:
+    on_success: always
+    on_failure: always
